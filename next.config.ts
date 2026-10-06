@@ -5,8 +5,11 @@ const nextConfig: NextConfig = {
   /* config options here */
 };
 
-// Lets `.mdx` files be imported like any other module (see lib/articles).
-// No remark/rehype plugins yet: they come later if the articles need them.
-const withMDX = createMDX({});
+// Auto-generates ids on headings so TOC links and deep-linking work.
+const withMDX = createMDX({
+  options: {
+    rehypePlugins: [["rehype-slug"]],
+  },
+});
 
 export default withMDX(nextConfig);

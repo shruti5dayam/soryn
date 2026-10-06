@@ -33,6 +33,10 @@ export const articleMetadata = {
 
 [PLACEHOLDER: a plain-language definition.]
 
+### Why this matters first
+
+[PLACEHOLDER: optional subsection clarifying the context.]
+
 ## Why does it matter?
 
 [PLACEHOLDER: the problem this solves and who needs to know it.]
@@ -41,13 +45,25 @@ export const articleMetadata = {
 
 [PLACEHOLDER: the core mechanism, step by step.]
 
+### Example walkthrough
+
+[PLACEHOLDER: optional step-by-step walkthrough.]
+
 ## Simple example
 
-[PLACEHOLDER: the smallest example that shows the idea.]
+[PLACEHOLDER: the smallest example that shows the idea. Use a fenced code block if showing code.]
+
+```python
+# Example code here
+```
 
 ## Deeper explanation
 
 [PLACEHOLDER: the details, trade-offs and edge cases.]
+
+### Advanced topic
+
+[PLACEHOLDER: optional subsection for advanced readers.]
 
 ## Real-world use
 

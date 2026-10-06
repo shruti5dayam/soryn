@@ -4,7 +4,7 @@
 // route handlers and generateStaticParams/generateMetadata, never from a
 // file that starts with "use client".
 
-import { readdir } from "node:fs/promises";
+import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import type { ComponentType } from "react";
 import { isValidSlug, validateArticleMetadata } from "./metadata";
@@ -18,6 +18,7 @@ const ARTICLES_DIR = path.join(process.cwd(), "content", "articles");
 export type Article = {
   metadata: ArticleMetadata;
   Content: ComponentType; // the rendered MDX body
+  sourceContent?: string; // raw MDX source for TOC extraction
 };
 
 // Slugs of every ".mdx" file in content/articles, sorted A-Z.
@@ -64,7 +65,20 @@ export async function getArticle(slug: string): Promise<Article | null> {
   const result = validateArticleMetadata(articleModule.articleMetadata, slug);
   if (!result.ok) throw new Error(result.errors.join("\n"));
 
-  return { metadata: result.metadata, Content: articleModule.default };
+  // Read the source file for TOC extraction
+  let sourceContent: string | undefined;
+  try {
+    const filePath = path.join(ARTICLES_DIR, `${slug}.mdx`);
+    sourceContent = await readFile(filePath, "utf-8");
+  } catch {
+    // Source not available, but that's ok for rendering
+  }
+
+  return {
+    metadata: result.metadata,
+    Content: articleModule.default,
+    sourceContent,
+  };
 }
 
 // Like getArticle, but returns null for drafts too. Use this for public pages.
