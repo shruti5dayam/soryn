@@ -1,0 +1,11 @@
+{/*
+  NOT AN ARTICLE. Do not delete or edit.
+
+  lib/articles/index.ts loads articles with import(`@/content/articles/${slug}.mdx`).
+  The build tool (Turbopack) fails if NO .mdx file matches that pattern, which
+  would break the build while the site has no articles yet. This empty file
+  guarantees one match.
+
+  It is never published: articles are only read from the top level of
+  content/articles/, and slugs cannot contain "/".
+*/}
