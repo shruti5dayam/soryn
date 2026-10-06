@@ -27,9 +27,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        {/* Lets keyboard users jump past the navigation. Hidden until focused. */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-control focus:border focus:border-border focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-foreground"
+        >
+          Skip to content
+        </a>
         <SiteHeader />
-        {/* Each page's content is rendered here as `children`. */}
-        <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-12">
+        {/* Full width on purpose: each page chooses its own width
+            by wrapping its content in <SiteContainer>. */}
+        <main id="main-content" className="flex-1">
           {children}
         </main>
         <SiteFooter />

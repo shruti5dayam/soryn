@@ -1,19 +1,103 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Soryn design tokens.
+ *
+ * Every value in @theme becomes both a CSS variable (e.g. var(--color-accent))
+ * and a set of Tailwind classes (e.g. text-accent, bg-accent, border-accent).
+ * Use these semantic names in components instead of raw hex values.
+ */
+@theme {
+  /* Colors */
+  --color-background: #faf9f6; /* page background (warm white) */
+  --color-surface: #ffffff; /* cards and raised surfaces */
+  --color-surface-soft: #f3f6fc; /* occasional soft-blue section */
+  --color-foreground: #18212f; /* primary text (navy) */
+  --color-muted: #667085; /* secondary text */
+  --color-accent: #3563e9; /* links, primary buttons, focus rings */
+  --color-accent-hover: #294fcc;
+  --color-border: #e7e9ee;
+
+  /* Content widths → max-w-wide, max-w-medium, max-w-reading */
+  --container-wide: 75rem; /* 1200px: header, footer, wide page sections */
+  --container-medium: 60rem; /* 960px: focused sections */
+  --container-reading: 46.25rem; /* 740px: article text */
+
+  /*
+   * Type scale → text-display, text-h1, text-h2, text-h3.
+   * clamp(min, preferred, max) grows smoothly from the mobile size
+   * to the desktop size as the screen gets wider.
+   */
+  --text-display: clamp(2.5rem, 1.5rem + 4vw, 4rem); /* 40px → 64px */
+  --text-display--line-height: 1.05;
+  --text-display--letter-spacing: -0.03em;
+  --text-h1: clamp(2.125rem, 1.5rem + 2.5vw, 3rem); /* 34px → 48px */
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h2: clamp(1.625rem, 1.25rem + 1.25vw, 2.125rem); /* 26px → 34px */
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h3: clamp(1.375rem, 1.25rem + 0.5vw, 1.5rem); /* 22px → 24px */
+  --text-h3--line-height: 1.3;
+  /* Body text uses Tailwind's text-base (16px) and text-lg (18px);
+     metadata uses text-sm (14px). */
+
+  /* Corner radii → rounded-control, rounded-card, rounded-surface */
+  --radius-control: 6px; /* buttons, inputs, small elements */
+  --radius-card: 12px; /* cards */
+  --radius-surface: 16px; /* large panels and sections */
+
+  /*
+   * Spacing: the approved scale (4, 8, 12, 16, 24, 32, 48, 64, 96px) is
+   * exactly Tailwind's default steps 1, 2, 3, 4, 6, 8, 12, 16, 24
+   * (e.g. p-4 = 16px, gap-12 = 48px, py-24 = 96px), so no custom tokens are needed.
+   *
+   * Shadows: intentionally none. Prefer borders, spacing and contrast.
+   *
+   * Future buttons: soft rectangles (rounded-control), not pills.
+   *   Primary:   bg-accent text-white hover:bg-accent-hover
+   *   Secondary: bg-surface text-foreground border border-border
+   */
 }
 
+/* Fonts are loaded by next/font in app/layout.tsx. `inline` lets these
+   reference the variables that next/font puts on the <html> element. */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    /* Soryn is light-first: keep browser UI (scrollbars, form controls)
+       light even when the operating system is in dark mode. */
+    color-scheme: light;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    /* Stops in-page links (#headings) from landing under the sticky header. */
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  /* One consistent, clearly visible keyboard focus ring for every element.
+     :focus-visible only shows for keyboard users, not mouse clicks. */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+/* Respect users who have asked their system to minimise motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
