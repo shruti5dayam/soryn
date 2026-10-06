@@ -1,0 +1,88 @@
+{/*
+  ARTICLE TEMPLATE
+
+  To start a new article:
+    1. Copy this file to content/articles/<your-slug>.mdx
+       (the file name must be exactly the slug, plus ".mdx").
+    2. Fill in articleMetadata below.
+    3. Replace every [PLACEHOLDER] with real, verified content.
+    4. Keep status: "draft" until the article has been reviewed.
+
+  This file ends in ".mdx.example", so it is NOT an article and is never
+  published. Do not rename it.
+*/}
+
+export const articleMetadata = {
+  title: "[PLACEHOLDER: article title]",
+  slug: "your-slug-here",
+  summary: "[PLACEHOLDER: one or two sentences shown on article cards]",
+  metaDescription: "[PLACEHOLDER: one sentence for search engines, about 150 characters]",
+  category: "AI & Agents",
+  tags: ["placeholder-tag", "another-tag"],
+  difficulty: "Beginner",
+  published: "2026-01-01",
+  updated: "2026-01-01",
+  status: "draft",
+}
+
+# [PLACEHOLDER: article title]
+
+[PLACEHOLDER: a short introduction. What will the reader understand by the end?]
+
+## What is it?
+
+[PLACEHOLDER: a plain-language definition.]
+
+### Why this matters first
+
+[PLACEHOLDER: optional subsection clarifying the context.]
+
+## Why does it matter?
+
+[PLACEHOLDER: the problem this solves and who needs to know it.]
+
+## How does it work?
+
+[PLACEHOLDER: the core mechanism, step by step.]
+
+### Example walkthrough
+
+[PLACEHOLDER: optional step-by-step walkthrough.]
+
+## Simple example
+
+[PLACEHOLDER: the smallest example that shows the idea. Use a fenced code block if showing code.]
+
+```python
+# Example code here
+```
+
+## Deeper explanation
+
+[PLACEHOLDER: the details, trade-offs and edge cases.]
+
+### Advanced topic
+
+[PLACEHOLDER: optional subsection for advanced readers.]
+
+## Real-world use
+
+[PLACEHOLDER: where this is used in practice. Only include verified examples.]
+
+## Connections
+
+[PLACEHOLDER: related concepts, with links to other Soryn articles once they exist.]
+
+## Limitations
+
+[PLACEHOLDER: what this does not do, and common misconceptions.]
+
+## Key takeaways
+
+- [PLACEHOLDER: takeaway one]
+- [PLACEHOLDER: takeaway two]
+- [PLACEHOLDER: takeaway three]
+
+## References
+
+- [PLACEHOLDER: source title, author, link]
