@@ -1,0 +1,707 @@
+export const articleMetadata = {
+  title: "What Is Agentic AI? From Answering Prompts to Choosing What Happens Next",
+  slug: "what-is-agentic-ai",
+  summary:
+    "Agentic AI changes the role of an AI system from simply responding to prompts toward pursuing a goal, choosing useful next actions, observing results, and adapting when circumstances change.",
+  metaDescription:
+    "Learn what Agentic AI means, how it differs from ordinary LLM interactions and predefined workflows, and how goals, actions, feedback, adaptation, and tools fit together.",
+  category: "AI & Agents",
+  tags: [
+    "agentic-ai",
+    "ai-agents",
+    "llms",
+    "ai-workflows",
+    "tool-use",
+  ],
+  difficulty: "Beginner",
+  published: "2026-10-07",
+  updated: "2026-10-07",
+  status: "published",
+}
+
+Agentic AI is often described with phrases such as "autonomous AI," "AI that uses tools," or "AI that can act." Those descriptions point in the right direction, but they can hide the more useful idea underneath.
+
+The important shift is not simply that an AI system has access to more software.
+
+It is that the system can be given a **goal**, make decisions about what should happen next, observe the result of those actions, and adjust its next decision when the situation changes.
+
+A regular language model can answer a prompt. An agentic system is designed to participate in an ongoing process of deciding, acting, observing, and adapting.
+
+That difference is the foundation for understanding AI agents.
+
+## Start with a regular LLM
+
+Suppose you ask a language model:
+
+> "What should I cook for dinner?"
+
+The model returns an answer.
+
+You read it, decide whether the suggestion is useful, and choose what to do next. You might ask another question, change the constraints, or perform an action yourself.
+
+The interaction looks roughly like this:
+
+**Human → Prompt → LLM → Response → Human chooses the next step**
+
+The model can still be extremely capable. It may explain concepts, summarize documents, generate code, analyze text, suggest plans, or answer complex questions.
+
+But in a basic prompt-response interaction, the model is not controlling the broader process. It responds to what it has been asked, and the human decides what happens afterward.
+
+That baseline matters because agentic behavior changes this relationship.
+
+## What changes when behavior becomes agentic?
+
+Instead of telling the AI exactly what to do at every step, we can give the surrounding system a **goal**.
+
+For example:
+
+> "Help me prepare this meal."
+
+Now the system may need to determine what information is missing, what action should happen next, whether the previous step worked, and what to do if reality does not match the original plan.
+
+A useful beginner mental model is:
+
+**Regular interaction**
+
+`Prompt → Response → Human decides next`
+
+**Agentic interaction**
+
+`Goal → Choose a next action → Result → Reevaluate`
+
+The second pattern is not about giving the model unlimited control.
+
+It is about giving the system some runtime responsibility for deciding **how to continue toward the goal**.
+
+## The key idea: who chooses the next step?
+
+One of the clearest ways to recognize agentic behavior is to ask:
+
+**At runtime, who or what determines what should happen next?**
+
+If the human or developer has already decided every important step, the system behaves more like a predefined process.
+
+If the model is allowed to examine the current situation and choose among possible next actions, the behavior becomes more agentic.
+
+This is also close to how Anthropic distinguishes workflows from agents. In its engineering guidance, workflows orchestrate LLMs and tools through predefined code paths, while agents allow the model to dynamically direct more of the process and tool usage.
+
+This does not mean that "choosing the next step" is a universal formal definition of agency. Different companies and research communities use the terms *agent*, *agentic system*, and *agentic AI* somewhat differently.
+
+But it is a strong practical mental model:
+
+> **Agentic behavior appears when the system can make meaningful runtime decisions about how to continue toward a goal.**
+
+## Goal, action, feedback and adaptation
+
+A compact way to think about agentic behavior is:
+
+**Goal → Decide → Act → Observe → Adapt**
+
+These stages describe the idea conceptually. They are not yet the full implementation architecture of an AI agent.
+
+### Goal
+
+The system needs an objective.
+
+Without a goal, there is no basis for deciding whether one possible action is more useful than another.
+
+A goal might be simple:
+
+> "Find the correct file."
+
+Or broader:
+
+> "Help me diagnose why this process is failing."
+
+The important point is that the goal does not necessarily specify the entire route.
+
+A traditional program may be told exactly which steps to execute.
+
+An agentic system may instead be given an objective and some available capabilities, then asked to determine how to proceed.
+
+### Decide
+
+The system evaluates the current situation and chooses a useful next step.
+
+That might mean:
+
+- asking for more information;
+- selecting a tool;
+- inspecting data;
+- retrying after an error;
+- changing the plan;
+- choosing between several possible actions;
+- or concluding that the task is complete.
+
+This decision-making responsibility is one of the main reasons an agentic system differs from a simple one-shot LLM interaction.
+
+### Act
+
+Something performs the selected or requested action.
+
+That "something" does not have to be the language model itself.
+
+It might be:
+
+- a human;
+- application code;
+- an API;
+- a database client;
+- a browser;
+- a file-reading function;
+- or another software service.
+
+This distinction matters because the language model and the execution layer often have different responsibilities.
+
+### Observe
+
+The action produces a result.
+
+That result might be:
+
+- success;
+- an error;
+- new data;
+- missing information;
+- an unexpected condition;
+- or evidence that the goal has already been reached.
+
+The result gives the system new information about the current state of the task.
+
+### Adapt
+
+If the result changes the situation, the next action can change too.
+
+This is what makes the process more than simply following an initial plan.
+
+The system is not required to continue blindly if reality no longer matches its assumptions.
+
+## A simple example: when reality changes the plan
+
+Imagine the goal is:
+
+> Prepare the meal.
+
+The intended next action is:
+
+> Prepare the vegetables.
+
+But then the environment provides new information:
+
+> No vegetables are available.
+
+A rigid sequence might simply fail or continue assuming that the original plan is still valid.
+
+An agentic interaction can instead reconsider the situation and choose another path.
+
+The pattern becomes:
+
+**Goal**
+
+`Prepare the meal`
+
+**Original next step**
+
+`Prepare vegetables`
+
+**New information**
+
+`Vegetables unavailable`
+
+**Updated decision**
+
+`Choose a different next action`
+
+The specific food example is not important. The decision structure is.
+
+The system receives information that invalidates part of the original plan and uses that information to change what happens next.
+
+That is what **adaptation** means in this context.
+
+It does **not** mean that the underlying language model automatically retrains itself or changes its neural-network weights every time something happens.
+
+Here, adaptation means:
+
+> **changing the next action based on new information available during the task.**
+
+## Agentic AI vs ordinary prompt-response interaction
+
+The distinction becomes clearer when the two interaction patterns are placed side by side.
+
+### Ordinary prompt-response interaction
+
+A user asks:
+
+> "What should I do next?"
+
+The model answers.
+
+The user performs an action.
+
+The user then decides whether another question is needed.
+
+The control flow largely remains with the human.
+
+### Agentic interaction
+
+A user provides a goal.
+
+The system can then determine what action is useful next, receive feedback, and reconsider its approach.
+
+That creates an ongoing relationship between:
+
+**decision → action → result → next decision**
+
+Current agent frameworks implement variations of this pattern by repeatedly calling a model, inspecting its output, executing requested actions when appropriate, returning the result, and continuing until the task reaches a stopping point.
+
+The implementation details can vary significantly.
+
+For now, the important distinction is conceptual:
+
+**A response ends an ordinary model interaction. In an agentic system, a response may instead become one step inside a larger task.**
+
+## Agent vs predefined workflow
+
+Agentic systems become easier to understand when compared with workflows.
+
+A simple workflow might look like this:
+
+`Input → Step A → Step B → Step C → Output`
+
+The developer has largely determined the control flow in advance.
+
+Workflows are especially useful when:
+
+- the task is repetitive;
+- the steps are known;
+- predictable behavior matters;
+- auditing is important;
+- the logic changes infrequently.
+
+Agentic behavior becomes more useful when the next step cannot always be decided beforehand.
+
+There is an important technical nuance here:
+
+A workflow does **not** have to be completely linear.
+
+A workflow can contain:
+
+- conditions;
+- branches;
+- retries;
+- loops;
+- LLM calls;
+- API calls;
+- tool usage.
+
+What makes it primarily a workflow is that its control logic is substantially encoded in advance.
+
+An agent gives the model more responsibility for making runtime decisions about how to proceed.
+
+So the distinction is not:
+
+**workflow = no branching**
+
+**agent = branching**
+
+It is closer to:
+
+**workflow = the developer primarily defines the path**
+
+**agent = the model dynamically helps choose the path**
+
+Real systems can combine both approaches.
+
+An application might use deterministic workflow logic for most of a process and introduce model-driven decision-making only where uncertainty or exceptions appear.
+
+That hybrid design is often more practical than making the entire system agentic.
+
+## Where tools fit
+
+Tools are another concept that can easily create confusion.
+
+A tool is a capability made available to the system.
+
+Examples include:
+
+- reading a file;
+- searching a database;
+- calling an API;
+- retrieving information from the web;
+- sending a message;
+- running code;
+- updating a business application.
+
+Tools allow an AI system to interact with information and systems outside the model's own text generation.
+
+But access to a tool does **not** automatically make an application an agent.
+
+A fixed workflow can also use an LLM and tools.
+
+Imagine application code that always does this:
+
+`Step 1: call tool A`
+
+`Step 2: call tool B`
+
+`Step 3: return the result`
+
+Even if an LLM participates somewhere in the sequence, the overall control flow is still largely predetermined.
+
+In a more agentic system, the model might evaluate the current situation and decide:
+
+- tool A is useful now;
+- tool C should be used after seeing A's result;
+- more information should be requested first;
+- the previous action should be retried;
+- or no further action is necessary.
+
+The important distinction is therefore not simply **whether tools exist**, but **how decisions about using them are made**.
+
+### The LLM does not necessarily perform the action itself
+
+This is one of the most useful architectural distinctions to understand early.
+
+Consider two versions of the same process.
+
+**Human-in-the-loop**
+
+`AI decides → Human performs action → Human reports result`
+
+**Software execution**
+
+`AI decides → Software/API performs action → Result returns`
+
+In both cases, the AI can participate in deciding what should happen next.
+
+But the execution is performed elsewhere.
+
+This gives us a more accurate mental model:
+
+**The model chooses or requests what should happen.**
+
+**Traditional software performs the operation.**
+
+For example, suppose the system decides that it needs to inspect a file.
+
+The model does not magically reach into the computer and open the file by itself.
+
+Instead, the surrounding application may expose a capability such as:
+
+`read_file(file_name)`
+
+The model can request that capability.
+
+Software then validates and executes the request.
+
+The result can be returned to the system so it can decide what to do next.
+
+The details of structured actions, parsing, validation, and execution deserve their own lesson.
+
+## What Agentic AI does not mean
+
+Understanding what agentic AI **doesn't** mean helps prevent several common misconceptions.
+
+### Agentic AI does not mean "an LLM with tools"
+
+Tools provide capabilities.
+
+They do not, by themselves, create agency.
+
+An LLM with access to search, files, or APIs can still operate inside a completely predefined workflow.
+
+What matters is how the system uses those capabilities and how much runtime decision-making is delegated to the model.
+
+### Agentic AI does not mean unlimited autonomy
+
+Agents operate inside systems designed by people.
+
+Their possible actions can be constrained by:
+
+- available tools;
+- permissions;
+- system instructions;
+- application logic;
+- approval requirements;
+- stopping conditions;
+- safety policies.
+
+The system may have greater freedom to choose among available actions, but that freedom is still bounded.
+
+### Agentic AI does not mean the model directly controls everything
+
+The model commonly proposes or selects an action.
+
+Software executes it.
+
+This separation is important because language models and deterministic software have different strengths.
+
+The model can help interpret ambiguous goals and choose among alternatives.
+
+Traditional software is better suited to reliably carrying out precisely defined operations.
+
+### Agentic AI does not mean the model automatically learns from every action
+
+An agent can alter its next decision after receiving new information.
+
+That is different from retraining the underlying model.
+
+For this lesson, **adaptation** means runtime adjustment.
+
+Longer-term memory, stored state, conversation history, and model training are separate concepts.
+
+### Agentic AI does not mean agents are always better
+
+This may be the most important engineering lesson.
+
+If a task can be solved reliably with a simple workflow, introducing agentic decision-making may add complexity without providing enough value.
+
+Anthropic's guidance on building agents recommends starting with the simplest solution and increasing complexity only when it improves outcomes enough to justify the additional cost and latency.
+
+Agentic architecture is therefore a design choice.
+
+It is not a maturity badge.
+
+## When agentic behavior is useful
+
+A useful rule is to look at **uncertainty in the path**.
+
+A deterministic workflow works well when:
+
+- the steps are known;
+- the logic is stable;
+- exceptions are limited;
+- predictable execution is important;
+- the same process should run consistently.
+
+Agentic behavior becomes more useful when:
+
+- the next step depends on information discovered during the task;
+- the number of required steps is difficult to know in advance;
+- several possible actions may be valid;
+- unexpected results require a changed approach;
+- the system needs to recover from errors;
+- the task is open-ended enough that hard-coding every path would be impractical.
+
+This does not mean every uncertain task needs an agent.
+
+It means agentic behavior becomes more valuable when **runtime judgment is genuinely useful**.
+
+## Real-world uses
+
+Agentic patterns can appear in many domains.
+
+The domain itself does not determine whether a system is agentic. The important question is how the system controls the sequence of actions.
+
+### Software engineering
+
+A deterministic script can run a test suite.
+
+An agentic coding system might instead:
+
+1. inspect a bug report;
+2. search the codebase;
+3. determine which files appear relevant;
+4. make a change;
+5. run tests;
+6. observe failures;
+7. revise the implementation;
+8. stop when the task is complete or requires human input.
+
+The later actions depend on what happened earlier.
+
+That runtime dependence is what makes the behavior more agentic.
+
+### Research and analysis
+
+A fixed research workflow might always:
+
+1. query the same sources;
+2. retrieve the same fields;
+3. combine the results;
+4. generate a report.
+
+An agentic research system might instead inspect what it has already found and decide which source, search, or question should come next.
+
+The research goal remains the same, but the route can change as new information appears.
+
+### Troubleshooting
+
+A predefined troubleshooting checklist works well when the same diagnostic process applies every time.
+
+An agentic system becomes more useful when each observation changes which diagnostic step should happen next.
+
+For example:
+
+`Check service status`
+
+If healthy:
+
+`Inspect logs`
+
+If unhealthy:
+
+`Check dependency`
+
+If the dependency is unavailable:
+
+`Investigate network or authentication`
+
+The important feature is that the next action depends on what the system discovers.
+
+### Business processes and assistants
+
+Agentic patterns can also appear in systems that work across business applications.
+
+For example, a system might need to:
+
+- inspect an incoming request;
+- determine what information is missing;
+- retrieve records from another system;
+- decide whether human approval is required;
+- perform an allowed action;
+- check the result.
+
+Again, not every business automation should be an agent.
+
+A repetitive process with stable rules may be better implemented as a conventional workflow.
+
+## Limitations and trade-offs
+
+Agentic systems gain flexibility by giving the model more responsibility for runtime decisions.
+
+That flexibility comes with costs.
+
+### Less predictable behavior
+
+A predefined workflow is generally easier to reason about because its important paths are explicitly encoded.
+
+When a model dynamically chooses actions, behavior can vary with context and model output.
+
+That increases the importance of evaluation, testing, monitoring, and guardrails.
+
+### Errors can compound
+
+If one decision produces a poor result, later decisions may build on it.
+
+For example:
+
+`incorrect assumption → wrong tool choice → misleading result → incorrect next action`
+
+A multi-step system can therefore turn one weak intermediate decision into a larger failure.
+
+This is one reason agent systems often require explicit constraints, validation, and stopping conditions.
+
+### More model calls can increase cost and latency
+
+A simple prompt-response interaction may require one model call.
+
+An agentic task may involve repeated cycles:
+
+`Decide → Act → Observe → Decide again`
+
+Each iteration can require additional model inference, tool calls, or external-system operations.
+
+That flexibility can improve task performance, but it can also increase latency and cost.
+
+### Tool access creates real-world risk
+
+When an AI system can take actions through external tools, incorrect decisions may have consequences beyond incorrect text.
+
+A mistaken answer in a chat is one thing.
+
+A mistaken action that:
+
+- modifies a database;
+- sends a message;
+- changes a record;
+- triggers an API;
+- or deletes a file
+
+is different.
+
+This is why permissions, validation, approval boundaries, logging, and guardrails become increasingly important as agents gain access to consequential capabilities.
+
+### Workflows remain valuable
+
+Agentic AI does not replace conventional software.
+
+In many systems, the strongest architecture combines deterministic code with limited points of model-driven decision-making.
+
+A useful principle is:
+
+> **Use the model where ambiguity requires judgment. Use ordinary software where the correct behavior can be specified reliably.**
+
+## A practical definition of Agentic AI
+
+We can now define the idea more precisely.
+
+**Agentic AI refers to AI systems designed to pursue a goal by making some runtime decisions about what to do next, taking or requesting actions through available capabilities, observing the results, and adapting subsequent actions based on feedback.**
+
+This definition is intentionally practical rather than universal.
+
+Different organizations use slightly different terminology, but current descriptions of agentic systems commonly emphasize some combination of:
+
+- goals;
+- decision-making;
+- actions;
+- tools;
+- feedback;
+- state;
+- iteration;
+- adaptation.
+
+The system does not need a perfectly fixed path.
+
+It needs:
+
+- a goal;
+- possible actions;
+- a way to choose among them;
+- feedback from what happened;
+- and a way to use that feedback when deciding what should happen next.
+
+A useful summary is:
+
+**Goal + Choice + Feedback + Adaptation**
+
+That is the core mental model.
+
+The implementation details come later.
+
+## Next lessons in this series
+
+- The Agent Loop
+- LLMs Don't Have Memory
+- From LLM Output to Real Actions
+- AI Agent vs Workflow
+
+## Key takeaways
+
+- A regular LLM typically responds to a prompt; an agentic system can give the model a role in deciding what should happen next.
+- Agentic behavior is goal-directed rather than purely one-response-at-a-time.
+- Feedback matters because later decisions can change based on what actually happened.
+- Adaptation in this context means changing the next action based on new information, not automatically retraining the model.
+- Tools provide capabilities, but tools alone do not make an application an agent.
+- The model often chooses or requests an action while ordinary software actually executes it.
+- A workflow can contain branches, loops, LLM calls, and tools. The important distinction is whether the control path is primarily predefined or dynamically chosen at runtime.
+- Agentic behavior becomes useful when the path is uncertain, exceptions matter, or later decisions depend on new information.
+- Deterministic workflows are often simpler, cheaper, more predictable, and easier to audit.
+- Agentic AI should be treated as an architectural pattern with trade-offs, not as a requirement for every AI application.
+
+## References
+
+### Soryn learning material
+
+- AI Agents & Agentic AI — Module 1, Part 1: What Makes AI Agentic?
+- What Is Agentic AI? carousel
+- Agent vs Workflow carousel
+
+### External verification
+
+- Anthropic — [Building Effective Agents](https://www.anthropic.com/engineering/building-effective-agents)
+- Anthropic — [Trustworthy Agents in Practice](https://www.anthropic.com/research/trustworthy-agents)
+- OpenAI — [Running Agents](https://developers.openai.com/api/docs/guides/agents/running-agents)
+- OpenAI — [Unrolling the Codex Agent Loop](https://openai.com/index/unrolling-the-codex-agent-loop/)
+- Google Cloud — [Core Concepts of AI Agents](https://cloud.google.com/resources/core-concepts-ai-agents)
+- Google Cloud — [What Is Agentic AI?](https://cloud.google.com/discover/what-is-agentic-ai)
