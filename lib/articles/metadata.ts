@@ -99,7 +99,7 @@ export function validateArticleMetadata(
 
 // Accepts only real calendar dates written as YYYY-MM-DD.
 // Returns true when valid; otherwise reports the problem and returns false.
-function checkDate(
+export function checkDate(
   field: string,
   value: unknown,
   fail: (message: string) => void,

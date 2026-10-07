@@ -7,7 +7,6 @@ const primaryLinks = [
   { href: "/blog", label: "Blog" },
   { href: "/categories", label: "Categories" },
   { href: "/projects", label: "Projects" },
-  { href: "/experiments", label: "Experiments" },
 ];
 
 // Pages about the site and its creator.

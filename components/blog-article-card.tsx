@@ -6,9 +6,13 @@ import { formatDate, shouldShowUpdated } from "@/lib/articles/toc";
 // full card is clickable without nesting interactive elements.
 export default function BlogArticleCard({
   article,
+  headingLevel = "h2",
 }: {
   article: ArticleMetadata;
+  // Use "h3" when the card sits under a section heading (e.g. the homepage).
+  headingLevel?: "h2" | "h3";
 }) {
+  const Heading = headingLevel;
   return (
     <article className="relative flex h-full flex-col rounded-card border border-border bg-surface p-6 transition-colors hover:border-accent md:p-8">
       <div className="flex items-center justify-between gap-4 text-sm">
@@ -19,14 +23,14 @@ export default function BlogArticleCard({
         </p>
       </div>
 
-      <h2 className="mt-6 text-h3 font-semibold">
+      <Heading className="mt-6 text-h3 font-semibold">
         <Link
           href={`/blog/${article.slug}`}
           className="rounded-control after:absolute after:inset-0 after:content-['']"
         >
           {article.title}
         </Link>
-      </h2>
+      </Heading>
       <p className="mt-3 text-base leading-7 text-muted">{article.summary}</p>
 
       <p className="mt-auto pt-6 text-sm text-muted">

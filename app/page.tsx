@@ -3,28 +3,32 @@ import SiteContainer from "@/components/site-container";
 import SectionHeading from "@/components/section-heading";
 import ProjectCard from "@/components/project-card";
 import CategoryCard from "@/components/category-card";
-import ArticleCard from "@/components/article-card";
-import ExperimentCard from "@/components/experiment-card";
+import BlogArticleCard from "@/components/blog-article-card";
 import {
   hero,
   projectsIntro,
-  projects,
   topicsIntro,
-  categories,
   articlesIntro,
-  articles,
-  experimentsIntro,
-  experiments,
   aboutIntro,
   about,
 } from "@/content/home";
+import { getAllArticleMetadata } from "@/lib/articles";
+import { CATEGORIES } from "@/lib/categories";
+import { getHomepageProjects } from "@/lib/projects";
 
 // Shared vertical spacing for every section: 64px on mobile, 96px on desktop.
 const sectionSpacing = "py-16 md:py-24";
 
 // This page only assembles the homepage. All the text lives in
 // content/home.ts, and each card's markup lives in its own component.
-export default function HomePage() {
+// Project and article sections only render when real published MDX exists.
+export default async function HomePage() {
+  const [projects, allArticles] = await Promise.all([
+    getHomepageProjects(3),
+    getAllArticleMetadata(),
+  ]);
+  const articles = allArticles.slice(0, 3);
+
   return (
     <>
       {/* 1. Hero */}
@@ -71,18 +75,20 @@ export default function HomePage() {
       </section>
 
       {/* 2. Selected Projects */}
+      {projects.length > 0 && (
       <section aria-labelledby="projects-heading">
         <SiteContainer className={sectionSpacing}>
           <SectionHeading id="projects-heading" {...projectsIntro} />
           <ul className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8">
             {projects.map((project) => (
-              <li key={project.title}>
-                <ProjectCard project={project} />
+              <li key={project.slug}>
+                <ProjectCard project={project} headingLevel="h3" />
               </li>
             ))}
           </ul>
         </SiteContainer>
       </section>
+      )}
 
       {/* 3. Areas / Topics (soft blue band) */}
       <section
@@ -92,8 +98,8 @@ export default function HomePage() {
         <SiteContainer className={sectionSpacing}>
           <SectionHeading id="topics-heading" {...topicsIntro} />
           <ul className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
-            {categories.map((category) => (
-              <li key={category.title}>
+            {CATEGORIES.map((category) => (
+              <li key={category.slug}>
                 <CategoryCard category={category} />
               </li>
             ))}
@@ -106,42 +112,22 @@ export default function HomePage() {
       </section>
 
       {/* 4. Featured Articles */}
-      <section aria-labelledby="articles-heading">
-        <SiteContainer className={sectionSpacing}>
-          <SectionHeading id="articles-heading" {...articlesIntro} />
-          {/* On tablet (2 columns) the last card spans both columns so it
-              doesn't sit alone; from `lg` up it goes back to one column. */}
-          <ul className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-            {articles.map((article) => (
-              <li
-                key={article.title}
-                className="md:last:col-span-2 lg:last:col-span-1"
-              >
-                <ArticleCard article={article} />
-              </li>
-            ))}
-          </ul>
-        </SiteContainer>
-      </section>
+      {articles.length > 0 && (
+        <section aria-labelledby="articles-heading">
+          <SiteContainer className={sectionSpacing}>
+            <SectionHeading id="articles-heading" {...articlesIntro} />
+            <ul className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+              {articles.map((article) => (
+                <li key={article.slug}>
+                  <BlogArticleCard article={article} headingLevel="h3" />
+                </li>
+              ))}
+            </ul>
+          </SiteContainer>
+        </section>
+      )}
 
-      {/* 5. Experiments / Build Logs */}
-      <section aria-labelledby="experiments-heading">
-        <SiteContainer className="pb-16 md:pb-24">
-          <SectionHeading id="experiments-heading" {...experimentsIntro} />
-          <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            {experiments.map((experiment) => (
-              <li
-                key={experiment.title}
-                className="md:last:col-span-2 lg:last:col-span-1"
-              >
-                <ExperimentCard experiment={experiment} />
-              </li>
-            ))}
-          </ul>
-        </SiteContainer>
-      </section>
-
-      {/* 6. About ShrutiD */}
+      {/* 5. About ShrutiD */}
       <section
         aria-labelledby="about-heading"
         className="border-t border-border"
