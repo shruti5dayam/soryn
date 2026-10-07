@@ -1,0 +1,69 @@
+{/*
+  PROJECT TEMPLATE
+
+  To start a new project write-up:
+    1. Copy this file to content/projects/<your-slug>.mdx
+       (the file name must be exactly the slug, plus ".mdx").
+    2. Fill in projectMetadata below.
+    3. Replace every [PLACEHOLDER] with real, verified content.
+    4. Keep status: "draft" until the write-up has been reviewed.
+
+  This file ends in ".mdx.example", so it is NOT a project and is never
+  published. Do not rename it. Do not write an H1 in the body: the title
+  from projectMetadata is the page's H1.
+*/}
+
+export const projectMetadata = {
+  title: "[PLACEHOLDER: project title]",
+  slug: "your-slug-here",
+  summary: "[PLACEHOLDER: one or two sentences shown on project cards]",
+  techStack: ["Python"],
+  tags: ["placeholder-tag"],
+  githubUrl: "https://github.com/your-name/your-repo",
+  featured: false,
+  published: "2026-01-01",
+  updated: "2026-01-01",
+  status: "draft",
+}
+
+[PLACEHOLDER: a short introduction. What is this project and why does it exist?]
+
+## Problem
+
+[PLACEHOLDER: the problem being solved.]
+
+## Goal
+
+[PLACEHOLDER: what success looks like.]
+
+## Architecture
+
+[PLACEHOLDER: the main parts of the system and how they fit together.]
+
+## Approach
+
+[PLACEHOLDER: how it was built.]
+
+### Important component
+
+[PLACEHOLDER: optional deep dive into one component.]
+
+## Results
+
+[PLACEHOLDER: only verified outcomes. No invented metrics.]
+
+## What I learned
+
+[PLACEHOLDER: lessons from building it.]
+
+## Limitations
+
+[PLACEHOLDER: what it does not do yet.]
+
+## Future improvements
+
+[PLACEHOLDER: what comes next.]
+
+## Repository
+
+[PLACEHOLDER: link to the repository and how to run it.]
