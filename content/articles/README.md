@@ -46,7 +46,9 @@ names the article and the field.
 
 ## Headings and Table of Contents
 
-- The article **title must be one `#` (H1)** heading at the start.
+- **Do not write an H1 (`#`) in the MDX body.** The `articleMetadata.title` is
+  automatically rendered as the page's single H1. Start your article body with
+  the introduction paragraph.
 - Use `##` (H2) for major sections and `###` (H3) for sub-sections.
 - **Do not skip heading levels** (e.g., don't jump from H2 to H4).
 - Use **plain text** in headings for V1. The TOC generator needs readable text

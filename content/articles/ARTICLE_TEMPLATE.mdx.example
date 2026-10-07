@@ -25,8 +25,6 @@ export const articleMetadata = {
   status: "draft",
 }
 
-# [PLACEHOLDER: article title]
-
 [PLACEHOLDER: a short introduction. What will the reader understand by the end?]
 
 ## What is it?
